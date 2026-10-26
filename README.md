@@ -6,7 +6,7 @@ Onderzoek naar de vraag of gestandaardiseerde verpleegkundige zorgplandata — *
 diagnoses en **NOC** uitkomstindicatoren — samen met de medische opname-indicatie
 (**ICD-10**) iets zeggen over de **opnameduur** (*Length of Stay*) van ziekenhuispatiënten.
 
-> ## ⚠️ Deze repository bevat patiëntgegevens
+> ## ⚠️ Deze repository bevat fictieve patiëntgegevens
 >
 > `Test datasheet NNN Minor.xlsx`, de uitgevoerde notebooks en `data/processed/` bevatten
 > patiëntnummers, verpleegkundige diagnoses en ICD-10-codes. **Houd deze repository privé**
