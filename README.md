@@ -6,12 +6,14 @@ Onderzoek naar de vraag of gestandaardiseerde verpleegkundige zorgplandata — *
 diagnoses en **NOC** uitkomstindicatoren — samen met de medische opname-indicatie
 (**ICD-10**) iets zeggen over de **opnameduur** (*Length of Stay*) van ziekenhuispatiënten.
 
-> ## ⚠️ Deze repository bevat fictieve patiëntgegevens
->
-> `Test datasheet NNN Minor.xlsx`, de uitgevoerde notebooks en `data/processed/` bevatten
-> patiëntnummers, verpleegkundige diagnoses en ICD-10-codes. **Houd deze repository privé**
-> en deel toegang alleen met groepsgenoten en docenten. Maak hem niet openbaar en plak geen
-> notebook-output in publieke kanalen.
+## Over de data
+
+`Test datasheet NNN Minor.xlsx` is een **fictieve testexport**: de patiëntnummers, diagnoses
+en ICD-10-codes horen niet bij echte patiënten. Daarom staat deze repository openbaar.
+
+Zodra er met een **echte** HMC-export gewerkt wordt, hoort die hier niet in. Zet de
+repository dan op privé of — beter — houd het databestand erbuiten via `.gitignore`, en let
+erop dat notebook-output ook patiëntgegevens bevat zodra je hem op echte data draait.
 
 ## Snel starten
 
@@ -30,6 +32,7 @@ opgezocht, dus je hoeft niets aan te passen.
 |---|---|
 | [`01_base_eda_hmc_nnn.ipynb`](notebooks/01_base_eda_hmc_nnn.ipynb) | Basis-EDA in vijf pijlers: datakwaliteit, opnameduur vs. diagnoseduur, zorgplan-complexiteit, startmoment van diagnoses, en ICD-10 vs. NANDA/NOC |
 | [`02_feature_engineering.ipynb`](notebooks/02_feature_engineering.ipynb) | Bouwt de modelleertabel met uitsluitend dag-0 kenmerken, inclusief leakage-controle en patiënt-gebonden train/test-split |
+| [`03_modellering.ipynb`](notebooks/03_modellering.ipynb) | Zet de evaluatieopzet neer: mediaan-baseline, drie featuresets en patiënt-gebonden cross-validatie |
 
 Beide notebooks zijn opgeslagen **mét uitgevoerde output**, zodat je de resultaten ziet
 zonder zelf te hoeven draaien.
@@ -56,6 +59,15 @@ definities.
 | `build_dag0_diagnose_dummies(df)` | 0/1-kolommen per NANDA-diagnose die op dag 0 liep |
 | `controleer_geen_leakage(tabel)` | Faalt zodra een kolom van Eindscore, gezondheidswinst of opnamebrede totalen is afgeleid |
 | `split_op_patient(tabel)` | Train/test-splitsing waarbij alle opnames van één patiënt aan dezelfde kant blijven |
+
+**`src/modellering.py`**
+
+| Functie | Doet |
+|---|---|
+| `bouw_featureset(tabel, naam)` | Selecteert de kolommen voor `icd10`, `nanda_noc` of `beide` |
+| `maak_pipeline(model, num, cat)` | Imputatie en one-hot-encoding vóór het model, zodat voorbewerking binnen elke fold gebeurt |
+| `evalueer_model(tabel, featureset, model)` | Leave-one-patient-out cross-validatie met MAE, RMSE en R² over de out-of-fold voorspellingen |
+| `vergelijk_modellen(tabel, modellen)` | Alle combinaties van model en featureset in één overzichtstabel |
 
 ## Twee afspraken die je niet moet overslaan
 
@@ -97,9 +109,18 @@ Nieuw werk begint met een change (`openspec new change <naam>`) met daarin een v
 ontwerp, takenlijst en spec-delta. Pas als alle taken afgevinkt zijn, worden de specs
 gepromoveerd en wordt de change gearchiveerd.
 
-## Volgende stap
+## Stand van zaken
 
-`notebooks/03_modellering.ipynb` bestaat nog niet. De afspraken daarvoor staan onderaan
-notebook 02: begin met een baseline die altijd de mediane opnameduur voorspelt, en vergelijk
-drie modellen — alleen ICD-10, alleen NANDA/NOC dag-0, en beide samen. Het verschil tussen
-het eerste en het laatste is het antwoord op de onderzoeksvraag.
+De pijplijn loopt van ruwe Excel tot out-of-fold voorspelling en is reproduceerbaar. Op de
+huidige **testset van 10 opnames** verslaat geen enkel model de mediaan-baseline, en de
+onderzoeksvraag is daarmee nog niet beantwoord — er is simpelweg te weinig data om een effect
+te kunnen zien. Dat is het verwachte resultaat bij 10 rijen en 22 kolommen.
+
+De volgende stap is dezelfde code draaien op de volledige HMC-export (~25.000 opnames).
+Onderaan notebook 03 staat een checklist van wat je daarbij aanpast: `GroupKFold` in plaats
+van leave-one-out, een `min_voorkomens`-drempel voor de diagnose-dummies, en geneste
+cross-validatie zodra je gaat tunen.
+
+Vraag daarnaast om de **echte opname- en ontslagdatum**. Zolang `Opnameduur_dagen` het
+verschil is tussen de eerste en de laatste meting, voorspel je deels het meetgedrag van de
+afdeling in plaats van de opnameduur van de patiënt.
