@@ -1,0 +1,11 @@
+Opnamenummer,Patientnr,ICD10Code,ICD10Omschrijving,icd10_hoofdcode,heeft_dag0_meting,n_metingen_dag0,n_diagnoses_dag0,n_indicatoren_dag0,n_diagnoses_actief_dag0,n_indicatoren_onder_5_dag0,baseline_score_gem_dag0,baseline_score_min_dag0,pct_score_5_dag0,Opnameduur_dagen,diag_acute_pijn,diag_acute_verwardheid,diag_angst,diag_disfunctionele_gastro_intestinale_peristaltiek,diag_huiddefect,diag_kennistekort,diag_mobiliteitstekort_lichamelijk,diag_obstipatie,diag_risico_op_acute_verwardheid,diag_risico_op_vallen_bij_volwassenen,diag_verstoord_welbevinden,diag_weefseldefect
+1,1,S72.00,Fractuur van femurhals; gesloten,S72,True,3,2,3,1,1,4.333333333333333,3.0,66.66666666666666,7,1,0,0,0,0,0,0,0,0,0,1,0
+2,2,S32.40,Fractuur van acetabulum; gesloten,S32,True,14,5,14,4,7,4.071428571428571,2.0,50.0,9,1,0,1,0,0,0,1,1,0,0,0,1
+3,3,S01.0,Open wond van behaarde hoofd,S01,True,11,2,11,2,6,4.454545454545454,4.0,45.45454545454545,2,0,0,0,0,1,0,0,0,0,0,1,0
+4,4,M00.97,"Pyogene artritis, niet gespecificeerd, van enkel en voet",M00,True,9,3,9,0,0,5.0,5.0,100.0,11,1,0,0,0,0,0,1,0,0,0,0,1
+5,5,S82.80,Fracturen van overige gespecificeerde delen van onderbeen; gesloten,S82,True,9,4,9,2,3,4.555555555555555,3.0,66.66666666666666,4,1,0,0,0,0,0,1,0,0,0,1,1
+6,6,S72.00,Fractuur van femurhals; gesloten,S72,True,5,2,5,0,0,5.0,5.0,100.0,6,1,1,0,0,0,0,0,0,0,0,0,0
+7,7,S72.00,Fractuur van femurhals; gesloten,S72,True,4,2,4,0,0,5.0,5.0,100.0,13,0,0,1,0,0,1,0,0,0,0,0,0
+8,8,K59.0,Constipatie,K59,True,21,3,21,3,5,4.666666666666667,3.0,76.19047619047619,9,0,0,0,1,0,0,0,0,1,1,0,0
+9,9,S72.10,Pertrochantaire fractuur; gesloten,S72,True,3,2,3,1,2,3.6666666666666665,3.0,33.33333333333333,5,1,0,0,0,0,0,1,0,0,0,0,0
+10,10,S92.50,Fractuur van overige teen; gesloten,S92,True,5,3,5,1,1,4.8,4.0,80.0,0,1,0,0,0,0,0,1,0,0,0,1,0

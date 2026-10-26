@@ -1,0 +1,12 @@
+# Normaliseer regeleindes, zodat Windows- en macOS-gebruikers geen valse diffs krijgen.
+* text=auto eol=lf
+
+# Binaire bestanden nooit aanraken.
+*.xlsx binary
+*.xls binary
+*.pdf binary
+*.png binary
+*.jpg binary
+
+# Notebooks zijn JSON: toon ze als tekst, maar met LF.
+*.ipynb text eol=lf
